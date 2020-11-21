@@ -46,12 +46,30 @@ class User extends Authenticatable
         return $this->hasOne(Profile::class);
     }
 
+    public function movies()
+    {
+        return $this->hasMany(Movie::class)->orderBy('created_at', 'DESC');
+    }
+
+    public function series()
+    {
+        return $this->hasMany(Serie::class)->orderBy('created_at', 'DESC');
+    }
+
+    public function books()
+    {
+        return $this->hasMany(Book::class)->orderBy('created_at', 'DESC');
+    }
+
     protected static function boot()
     {
         parent::boot();
 
         static::created(function ($user) {
-            $user->profile()->create();
+            $user->profile()->create([
+                'description' => 'No description',
+                'image' => null,
+            ]);
         });
     }
 }
