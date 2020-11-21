@@ -92,5 +92,8 @@ class MoviesController extends Controller
      */
     public function destroy(Movie $movie)
     {
+        $movie->delete();
+
+        return redirect('/profile/'.auth()->user()->id);
     }
 }

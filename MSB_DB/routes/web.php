@@ -27,6 +27,7 @@ Route::patch('/profile/{user}', [App\Http\Controllers\ProfilesController::class,
 
 Route::get('/m/create', [App\Http\Controllers\MoviesController::class, 'create']);
 Route::get('/m/{movie}', [App\Http\Controllers\MoviesController::class, 'show']);
+Route::delete('/m/{movie}', [App\Http\Controllers\MoviesController::class, 'destroy']);
 Route::post('/m', [App\Http\Controllers\MoviesController::class, 'store']);
 
 Route::get('/s/create', [App\Http\Controllers\SeriesController::class, 'create']);

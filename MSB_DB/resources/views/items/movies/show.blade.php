@@ -12,13 +12,20 @@
                     <img src="{{ $movie->user->profile->profileImage()}}" class="w-100 rounded-circle" style="max-width:40px;">
                 </div>
                 <div>
-                    <div class="font-weight-bold">
-                    <a href="/profile/{{ $movie->user->id }}">
-                    <span class="text-dark">
-                        {{ $movie->user->username }}
-                    </span>
-                    </a>
+                    <div class="font-weight-bold pr-1">
+                        <a href="/profile/{{ $movie->user->id }}">
+                            <span class="text-dark">
+                                {{ $movie->user->username }}
+                            </span>
+                        </a>
                     </div>
+                </div>
+                <div class="mb-n2">
+                    <form action="/m/{{ $movie->id }}" enctype="multipart/form-data" method="POST">
+                    @csrf
+                    @method('DELETE')
+                        <input type="image" src="/storage/default/delete-black-18dp.svg">
+                    </form>
                 </div>
             </div>
             <hr>
