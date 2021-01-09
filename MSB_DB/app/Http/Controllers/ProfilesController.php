@@ -10,7 +10,7 @@ class ProfilesController extends Controller
 {
     public function index(User $user)
     {
-        $movies = Movie::whereIn('user_id', $user)->latest()->paginate(6);
+        $movies = Movie::whereIn('user_id', $user)->latest()->paginate(15);
 
         $moviesCount = $user->movies->count();
         $seriesCount = $user->series->count();
