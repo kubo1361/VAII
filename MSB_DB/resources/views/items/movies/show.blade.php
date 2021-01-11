@@ -32,6 +32,7 @@
         <div class="pl-3 d-flex align-items-center justify-content-start">
             <div class="pl-3">
                 <div class="font-weight-bold pt-1">Name: {{ $movie->name }}</div>
+                <div class="font-weight-bold pt-1">Status: {{ $movie->state }}</div>
                 <div class="font-weight-bold pt-1">Rating: {{ $movie->rating }}%</div>
                 <div class="font-weight-bold pt-1">Comment: </div>
                 <div class=" pt-1">{{$movie->comment}}</div>

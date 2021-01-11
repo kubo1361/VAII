@@ -48,17 +48,17 @@ class User extends Authenticatable
 
     public function movies()
     {
-        return $this->hasMany(Movie::class)->orderBy('created_at', 'DESC');
+        return $this->hasMany(Movie::class)->orderBy('updated_at', 'ASC');
     }
 
     public function series()
     {
-        return $this->hasMany(Serie::class)->orderBy('created_at', 'DESC');
+        return $this->hasMany(Serie::class)->orderBy('updated_at', 'ASC');
     }
 
     public function books()
     {
-        return $this->hasMany(Book::class)->orderBy('created_at', 'DESC');
+        return $this->hasMany(Book::class)->orderBy('updated_at', 'ASC');
     }
 
     protected static function boot()

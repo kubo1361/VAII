@@ -2,13 +2,17 @@
 
 @section('content')
 <div class="container">
+
     <form action="/m" enctype="multipart/form-data" method="POST">
     @csrf
+
     <div class="row">
         <div class="col-8 offset-2">
+
             <div class="row">
                 <h1>Add New Movie</h1>
             </div>
+
             <div class="form-group row">
                 <label for="name" class="col-md-4 col-form-label">Name of the Movie</label>
                     <input id="name"
@@ -21,6 +25,17 @@
                         <strong>{{ $message }}</strong>
                     @enderror
             </div>
+
+            <div class="form-group row">
+                <label for="state" class="col-md-4 col-form-label">State</label>
+                    <select class="form-control" id="state" name="state">
+                        <option value="Watching" selected>Watching</option>
+                        <option value="Plan to watch">Plan to watch</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Dropped">Dropped</option>
+                    </select>
+            </div>
+
             <div class="form-group row">
                 <label for="rating" class="col-md-4 col-form-label">Rating</label>
                     <input id="rating"
@@ -33,6 +48,7 @@
                         <strong>{{ $message }}</strong>
                     @enderror
             </div>
+
             <div class="form-group row">
                 <label for="comment" class="col-md-4 col-form-label">Comment</label>
                     <input id="comment"
@@ -45,6 +61,7 @@
                         <strong>{{ $message }}</strong>
                     @enderror
             </div>
+
             <div class="row">
                     <label for="image" class="col-md-4 col-form-label">Movie Image</label>
                 <input type="file", class="form-control-file" id="image" name="image">
@@ -52,6 +69,7 @@
                     <strong>{{ $message }}</strong>
                 @enderror
             </div>
+
             <div class="row pt-4">
                 <button class="btn btn-primary"> Add new Movie </button>
             </div>

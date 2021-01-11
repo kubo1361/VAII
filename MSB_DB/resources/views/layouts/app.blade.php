@@ -69,9 +69,9 @@
                                     Lists
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">Movies</a>
-                                    <a class="dropdown-item" href="#">Series</a>
-                                    <a class="dropdown-item" href="#">Books</a>
+                                    <a class="dropdown-item" href="{{ '/movies/' . auth()->user()->id }}">Movies</a>
+                                    <a class="dropdown-item" href="{{ '/series/' . auth()->user()->id }}">Series</a>
+                                    <a class="dropdown-item" href="{{ '/books/' . auth()->user()->id }}">Books</a>
                                 </div>
                             </li>
 

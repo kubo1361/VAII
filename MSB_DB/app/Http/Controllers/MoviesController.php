@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Movie;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class MoviesController extends Controller
@@ -17,8 +18,36 @@ class MoviesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(User $user)
     {
+        $allMovies = Movie::whereIn('user_id', $user)->latest()->get();
+        $allMoviesCount = $allMovies->count();
+
+        $watchingMovies = $allMovies->where('state', 'Watching');
+        $watchingMoviesCount = $watchingMovies->count();
+
+        $ptwMovies = $allMovies->where('state', 'Plan to watch');
+        $ptwMoviesCount = $ptwMovies->count();
+
+        $completedMovies = $allMovies->where('state', 'Completed');
+        $completedMoviesCount = $completedMovies->count();
+
+        $droppedMovies = $allMovies->where('state', 'Dropped');
+        $droppedMoviesCount = $droppedMovies->count();
+
+        return view('items.movies.index', compact(
+            'user',
+            'allMovies',
+            'allMoviesCount',
+            'watchingMovies',
+            'watchingMoviesCount',
+            'ptwMovies',
+            'ptwMoviesCount',
+            'completedMovies',
+            'completedMoviesCount',
+            'droppedMovies',
+            'droppedMoviesCount'
+        ));
     }
 
     /**
@@ -38,9 +67,11 @@ class MoviesController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request);
         $validatedData = $request->validate([
             'name' => 'required|unique:movies',
             'rating' => 'required|numeric|max:100',
+            'state' => 'required|in:Watching,Plan to watch,Completed,Dropped',
             'comment' => '',
             'image' => 'image',
         ]);

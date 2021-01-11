@@ -80,15 +80,7 @@
 
     <div class="row pt-1 d-flex flex-row flex-nowrap overflow-auto">
         <div class="col">
-            <div class="card bg-secondary ">
-                <img class="card-img-top" src="#">
-                <div class="card-body d-flex align-items-center">
-                    <div class="card-text font-weight-bold pr-2" style="border-right:1px solid black">
-                        <a href="#" class="stretched-link text-white"></a>
-                    </div>
-                    <div class="card-text font-weight-bold pl-2"></div>
-                </div>
-            </div>
+        
         </div>
     </div>
 
@@ -104,15 +96,7 @@
 
     <div class="row pt-1 d-flex flex-row flex-nowrap overflow-auto">
         <div class="col">
-            <div class="card bg-secondary ">
-                <img class="card-img-top" src="#">
-                <div class="card-body d-flex align-items-center">
-                    <div class="card-text font-weight-bold pr-2" style="border-right:1px solid black">
-                        <a href="#" class="stretched-link text-white"></a>
-                    </div>
-                    <div class="card-text font-weight-bold pl-2"></div>
-                </div>
-            </div>
+            
         </div>
 </div>
 @endsection

@@ -27,6 +27,7 @@ class MovieFactory extends Factory
             'image' => $this->faker->imageUrl(),
             'rating' => $this->faker->numberBetween(0, 100),
             'comment' => $this->faker->text(100),
+            'state' => 'Completed',
         ];
     }
 }

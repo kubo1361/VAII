@@ -16,6 +16,7 @@ class Movies extends Migration
             $table->string('name');
             $table->string('image')->nullable();
             $table->integer('rating');
+            $table->enum('state', ['Watching', 'Plan to watch', 'Completed', 'Dropped']);
 
             $table->string('comment')->nullable();
             $table->timestamps();

@@ -26,6 +26,8 @@ Route::get('/profile/{user}', [App\Http\Controllers\ProfilesController::class, '
 Route::get('/profile/{user}/edit', [App\Http\Controllers\ProfilesController::class, 'edit'])->name('profile.edit');
 Route::patch('/profile/{user}', [App\Http\Controllers\ProfilesController::class, 'update'])->name('profile.update');
 
+Route::get('/movies/{user}', [App\Http\Controllers\MoviesController::class, 'index'])->name('movies.show');
+
 Route::get('/m/create', [App\Http\Controllers\MoviesController::class, 'create']);
 Route::get('/m/{movie}', [App\Http\Controllers\MoviesController::class, 'show']);
 Route::delete('/m/{movie}', [App\Http\Controllers\MoviesController::class, 'destroy']);
