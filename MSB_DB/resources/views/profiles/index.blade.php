@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-2 pl-3 d-flex align-items-center">
-            <img src="{{$user->profile->profileImage()}}" class="nonimportant rounded-circle w-100">
+            <img src="{{ $user->profile->profileImage() }}" class="nonimportant rounded-circle w-100">
         </div>
         <div class="col-sm-10 pt-1 pl-3">
             <div class="d-flex justify-content-start align-items-start">
@@ -55,7 +55,7 @@
     <div class="row pt-1 d-flex flex-row flex-nowrap overflow-auto">
         @foreach($movies as $movie)
         <div class="col">
-            <div class="card bg-secondary">
+            <div class="card bg-secondary" style="width: 10rem;">
                 <img class="card-img-top" src="{{ $movie->image }}">
                 <div class="card-body d-flex align-items-center">
                     <div class="card-text font-weight-bold pr-2" style="border-right:1px solid black">

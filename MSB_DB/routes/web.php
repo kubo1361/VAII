@@ -15,18 +15,23 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 
 Auth::routes();
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/users', [App\Http\Controllers\UsersController::class, 'index'])->name('users.show');
+Route::get('/friends/{user}', [App\Http\Controllers\FriendsController::class, 'index'])->name('friends.show');
+
 Route::get('/profile/{user}', [App\Http\Controllers\ProfilesController::class, 'index'])->name('profile.show');
 Route::get('/profile/{user}/edit', [App\Http\Controllers\ProfilesController::class, 'edit'])->name('profile.edit');
 Route::patch('/profile/{user}', [App\Http\Controllers\ProfilesController::class, 'update'])->name('profile.update');
 
 Route::get('/movies/{user}', [App\Http\Controllers\MoviesController::class, 'index'])->name('movies.show');
+Route::get('/series/{user}', [App\Http\Controllers\SeriesController::class, 'index'])->name('series.show');
+Route::get('/books/{user}', [App\Http\Controllers\BooksController::class, 'index'])->name('books.show');
 
 Route::get('/m/create', [App\Http\Controllers\MoviesController::class, 'create']);
 Route::get('/m/{movie}', [App\Http\Controllers\MoviesController::class, 'show']);

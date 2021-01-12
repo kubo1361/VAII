@@ -11,6 +11,8 @@ class User extends Authenticatable
     use HasFactory;
     use Notifiable;
 
+    protected $table = 'users';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -46,6 +48,34 @@ class User extends Authenticatable
         return $this->hasOne(Profile::class);
     }
 
+    // friendship that I started
+    public function friendsOfMine()
+    {
+        return $this->belongsToMany(User::class, 'friendship', 'user_id', 'friend_id')
+            ->wherePivot('accepted', '=', 1) // to filter only accepted
+            ->withPivot('accepted') // or to fetch accepted value
+    ;
+    }
+
+    // friendship that I was invited to
+    public function friendOf()
+    {
+        return $this->belongsToMany(User::class, 'friendship', 'friend_id', 'user_id')
+            ->wherePivot('accepted', '=', 1)
+            ->withPivot('accepted')
+    ;
+    }
+
+    // accessor allowing you call $user->friends
+    public function getFriendsAttribute()
+    {
+        if (!array_key_exists('friendship', $this->relations)) {
+            $this->loadFriends();
+        }
+
+        return $this->getRelation('friendship');
+    }
+
     public function movies()
     {
         return $this->hasMany(Movie::class)->orderBy('updated_at', 'ASC');
@@ -59,6 +89,20 @@ class User extends Authenticatable
     public function books()
     {
         return $this->hasMany(Book::class)->orderBy('updated_at', 'ASC');
+    }
+
+    protected function loadFriends()
+    {
+        if (!array_key_exists('friendship', $this->relations)) {
+            $friends = $this->mergeFriends();
+
+            $this->setRelation('friendship', $friends);
+        }
+    }
+
+    protected function mergeFriends()
+    {
+        return $this->friendsOfMine->merge($this->friendOf);
     }
 
     protected static function boot()

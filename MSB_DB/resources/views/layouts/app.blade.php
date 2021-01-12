@@ -56,12 +56,16 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Users</a>
+                        <li class="nav-item vl-r pr-3">
+                                <a class="nav-link" href="{{ '/profile/' . auth()->user()->id }}">My profile</a>
+                            </li>
+
+                            <li class="nav-item pl-3">
+                                <a class="nav-link" href="{{ '/users' }}">Users</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Friends</a>
+                                <a class="nav-link" href="{{ '/friends/' . auth()->user()->id }}">Friends</a>
                             </li>
 
                             <li class="nav-item dropdown">

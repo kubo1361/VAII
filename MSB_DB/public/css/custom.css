@@ -34,13 +34,14 @@
 .material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
 
 
-
-/* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) { 
+@media (max-width: 576px) { 
     .nonimportant  {
         display:none;
     }
+}
 
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) { 
     .card-columns {
         column-count: 1;
     } 

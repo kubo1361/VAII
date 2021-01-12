@@ -5,7 +5,7 @@
     <div class="row">
         <div class="pl-3 d-flex align-items-center justify-content-start">
             <div class="pr-3">
-                <img src="{{ $movie->user->profile->profileImage()}}" class="w-100 rounded-circle" style="max-width:40px;">
+                <img src="{{ $movie->user->profile->profileImage()}}" class="rounded-circle" style="width: 3rem;">
             </div>
             <div>
                 <div class="font-weight-bold pr-1">
@@ -41,7 +41,7 @@
     </div>
 
     <div class="row">
-        <div class="p-4">
+        <div class="p-4" style="width: 50rem;">
             <a href="{{ $movie -> image }}">
                 <img src="{{ $movie -> image }}"  class="img-fluid">
             </a>
