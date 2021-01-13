@@ -8,12 +8,18 @@
         </div>
         <div class="col-sm-10 pt-1 pl-3">
             <div class="d-flex justify-content-start align-items-start">
-                <div class="h4 vl-r pr-2">{{ $user->username }}</div>
-                <div class="pl-2">
+                <div class="h4 pr-2">{{ $user->username }}</div>
+                @can('update', $user->profile)
+                <div class="vl-l pl-2">
                     <a href="/profile/{{$user->id}}/edit"> 
                         <i class="material-icons md-18 md-dark mt-1">edit</i>
                     </a>
                 </div>
+                @endcan
+
+                @cannot('update', $user->profile)
+                    <div id="example"></div>
+                @endcannot
             </div>
             <div class="d-flex">
                 <div class='pr-3'><strong>{{ $moviesCount }}</strong> Movies</div>
@@ -28,7 +34,7 @@
     <hr>
 
     <div class="row pl-3 pt-2">
-        <div class="font-weight-bold">NEWS</div>
+        <div class="font-weight-bold">ACTIVITY</div>
     </div>
 
     <div class="row">
@@ -45,13 +51,23 @@
 
     <div class="row pl-3 pt-4 d-flex align-items-center">
         <div class="font-weight-bold pr-2">MOVIES</div>
+        @can('update', $user->profile)
         <div class="pl-2 vl-l">
             <a href="/m/create"> 
                 <i class="material-icons md-18 md-dark mt-1">add</i>
             </a>
         </div>
+        @endcan
     </div>
 
+    @if($moviesCount == 0)
+        @can('update', $user->profile)
+            <p class="lead text-center pt-2"> There are no movies. Try adding one :)</p>
+        @endcan
+        @cannot('update', $user->profile)
+            <p class="lead text-center pt-2"> {{ $user->username }} haven't added any movies yet.</p>
+        @endcannot
+    @else
     <div class="row pt-1 d-flex flex-row flex-nowrap overflow-auto">
         @foreach($movies as $movie)
         <div class="col">
@@ -67,36 +83,58 @@
         </div>
         @endforeach
     </div>
+    @endif
 
 
     <div class="row pl-3 pt-4 d-flex align-items-center">
-        <div class="font-weight-bold pr-2">SERIES</div>
+        <div class="font-weight-bold pr-3">SERIES</div>
+        @can('update', $user->profile)
         <div class="pl-2 vl-l">
             <a href="/m/create"> 
                 <i class="material-icons md-18 md-dark mt-1">add</i>
             </a>
         </div>
+        @endcan
     </div>
 
+    @if($seriesCount == 0)
+        @can('update', $user->profile)
+            <p class="lead text-center pt-2"> There are no series. Try adding one :)</p>
+        @endcan
+        @cannot('update', $user->profile)
+            <p class="lead text-center pt-2"> {{ $user->username }} haven't added any series yet.</p>
+        @endcannot
+    @else
     <div class="row pt-1 d-flex flex-row flex-nowrap overflow-auto">
         <div class="col">
         
         </div>
     </div>
-
+    @endif
 
     <div class="row pl-3 pt-4 d-flex align-items-center">
-        <div class="font-weight-bold pr-2">BOOKS</div>
+        <div class="font-weight-bold pr-3">BOOKS</div>
+        @can('update', $user->profile)
         <div class="pl-2 vl-l">
             <a href="/m/create"> 
                 <i class="material-icons md-18 md-dark mt-1">add</i>
             </a>
         </div>
+        @endcan
     </div>
 
+    @if($booksCount == 0)
+        @can('update', $user->profile)
+            <p class="lead text-center pt-2"> There are no books. Try adding one :)</p>
+        @endcan
+        @cannot('update', $user->profile)
+            <p class="lead text-center pt-2"> {{ $user->username }} haven't added any books yet.</p>
+        @endcannot
+    @else
     <div class="row pt-1 d-flex flex-row flex-nowrap overflow-auto">
         <div class="col">
             
         </div>
+    @endif
 </div>
 @endsection

@@ -30,7 +30,7 @@
             <div class="font-weight-bold pt-1 pb-1">All movies: {{ $allMoviesCount }}</div>
             <div class="card-columns">
                 @foreach($allMovies as $movie)
-                    <div class="card bg-secondary" style="width: 10rem;">
+                    <div class="card bg-secondary" style="max-width: 16rem;">
                         <img class="card-img-top" src="{{ $movie->image }}">
                         <div class="card-body d-flex align-items-center">
                             <div class="card-text font-weight-bold pr-2" style="border-right:1px solid black">
@@ -47,7 +47,7 @@
             <div class="font-weight-bold pt-1 pb-1">Currently watching: {{ $watchingMoviesCount }}</div>
             <div class="card-columns">
                 @foreach($watchingMovies as $movie)
-                <div class="card bg-secondary" style="width: 10rem;">
+                <div class="card bg-secondary" style="max-width: 16rem;">
                     <img class="card-img-top" src="{{ $movie->image }}">
                     <div class="card-body d-flex align-items-center">
                         <div class="card-text font-weight-bold pr-2" style="border-right:1px solid black">
@@ -64,7 +64,7 @@
             <div class="font-weight-bold pt-1 pb-1">Plan to watch: {{ $ptwMoviesCount }}</div>
             <div class="card-columns">
                 @foreach($ptwMovies as $movie)
-                <div class="card bg-secondary" style="width: 10rem;">
+                <div class="card bg-secondary" style="max-width: 16rem;">
                     <img class="card-img-top" src="{{ $movie->image }}">
                     <div class="card-body d-flex align-items-center">
                         <div class="card-text font-weight-bold pr-2" style="border-right:1px solid black">
@@ -81,7 +81,7 @@
             <div class="font-weight-bold pt-1 pb-1">Completed: {{ $completedMoviesCount }}</div>
             <div class="card-columns">
                 @foreach($completedMovies as $movie)
-                <div class="card bg-secondary" style="width: 10rem;">
+                <div class="card bg-secondary" style="max-width: 16rem;">
                     <img class="card-img-top" src="{{ $movie->image }}">
                     <div class="card-body d-flex align-items-center">
                         <div class="card-text font-weight-bold pr-2" style="border-right:1px solid black">
@@ -98,7 +98,7 @@
             <div class="font-weight-bold pt-1 pb-1">Dropped: {{ $droppedMoviesCount }}</div>
             <div class="card-columns">
                 @foreach($droppedMovies as $movie)
-                <div class="card bg-secondary" style="width: 10rem;">
+                <div class="card bg-secondary" style="max-width: 16rem;">
                     <img class="card-img-top" src="{{ $movie->image }}">
                     <div class="card-body d-flex align-items-center">
                         <div class="card-text font-weight-bold pr-2" style="border-right:1px solid black">
