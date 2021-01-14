@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -36,6 +38,21 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    /*
+    public function authenticate(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+        dd('here');
+        if (Auth::attempt($credentials)) {
+            if (auth()->user()->enabled) {
+                $this->redirectTo();
+            } else {
+                return response()->caps('YOU HAVE BEEN BANNED');
+            }
+        }
+    }
+    */
 
     protected function redirectTo()
     {

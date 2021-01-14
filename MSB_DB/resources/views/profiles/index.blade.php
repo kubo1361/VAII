@@ -16,10 +16,6 @@
                     </a>
                 </div>
                 @endcan
-
-                @cannot('update', $user->profile)
-                    <div id="example"></div>
-                @endcannot
             </div>
             <div class="d-flex">
                 <div class='pr-3'><strong>{{ $moviesCount }}</strong> Movies</div>
@@ -32,22 +28,6 @@
     </div>
 
     <hr>
-
-    <div class="row pl-3 pt-2">
-        <div class="font-weight-bold">ACTIVITY</div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-3">
-            <div class="card bg-light" style="width: max-width;">
-                <div class="card-body">
-                    <h4 class="card-title">Some title</h4>
-                    <p class="card-text">Was added, removed, etc..</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
 
     <div class="row pl-3 pt-4 d-flex align-items-center">
         <div class="font-weight-bold pr-2">MOVIES</div>
