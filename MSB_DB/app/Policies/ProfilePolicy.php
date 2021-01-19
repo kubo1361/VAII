@@ -17,6 +17,7 @@ class ProfilePolicy
      */
     public function viewAny(User $user)
     {
+        return auth()->user->is_admin;
     }
 
     /**
@@ -26,6 +27,11 @@ class ProfilePolicy
      */
     public function view(User $user, Profile $profile)
     {
+        $ownProfile = auth()->user()->id == $profile->user->id;
+        $isAdmin = auth()->user()->is_admin;
+        $isPublic = !$profile->user->private;
+
+        return $ownProfile || $isAdmin || $isPublic;
     }
 
     /**
@@ -45,6 +51,11 @@ class ProfilePolicy
     public function update(User $user, Profile $profile)
     {
         return $user->id === $profile->user_id || $user->is_admin;
+    }
+
+    public function ownProfile(User $user, Profile $profile)
+    {
+        return auth()->user()->id == $profile->user->id;
     }
 
     /**

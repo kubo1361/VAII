@@ -44,5 +44,5 @@ Admin user:
 Routes:
 - ~~secure routes~~
 
-- remove settings controller and move things to user controller
+- ~~remove settings controller and move things to user controller~~
 

@@ -16,13 +16,34 @@
                     </a>
                 </div>
             </div>
-            <div class="mb-n2 vl-l pl-1">
+            @can('update', $movie->user->profile)
+            <div class="pt-1 pl-1 vl-l">
+                <form name="editItem" action="/m/{{ $movie->id }}/e" enctype="multipart/form-data" method="GET">
+                    @csrf
+                    @method('GET')
+                    <input type="image" class="material-icons md-18 md-dark" value="edit">
+                </form>
+            </div>
+            <div class="font-weight-bold">
+                <->
+            </div>
+            <div class="pt-1 pl-1">
                 <form name="deleteItem" action="/m/{{ $movie->id }}" enctype="multipart/form-data" method="POST">
                     @csrf
                     @method('DELETE')
-                    <input type="submit" class="material-icons md-18 md-dark" value="delete">
+                    <input type="image" class="material-icons md-18 md-dark" value="delete">
                 </form>
             </div>
+            @endcan
+            @cannot('update', $movie->user->profile)
+            <div class="mb-n2">
+                <form name="copy" action="/m/{{ $movie->id }}/c" enctype="multipart/form-data" method="GET">
+                    @csrf
+                    @method('GET')
+                    <input type="image" class="material-icons md-18 md-dark" value="add">
+                </form>
+            </div>
+            @endcannot
         </div>
     </div>
 
@@ -43,7 +64,7 @@
     <div class="row">
         <div class="p-4" style="width: 50rem;">
             <a href="{{ $movie -> image }}">
-                <img src="{{ $movie -> image }}"  class="img-fluid">
+                <img src="{{ $movie -> image }}" class="img-fluid">
             </a>
         </div>
     </div>

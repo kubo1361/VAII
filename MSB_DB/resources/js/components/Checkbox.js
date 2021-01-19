@@ -6,31 +6,32 @@ class ReactCheckbox extends React.Component {
         super(props);
         this.userId = props.userId;
         this.text = props.text;
-        this.state = {checked: props.checked == 1 ? true : false};
+        this.state = { checked: props.checked == 1 ? true : false };
         this.handleChange = this.handleChange.bind(this);
     }
 
-    handleChange(event) {    
-        this.setState({ checked: event.target.checked },()=>{
-            axios.post('/settings/' + this.userId + "/p", {private: this.state.checked})
-                    .then(res => { 
-                    }).catch(err => {
-                    console.log(err)})
-            console.log(this.state.checked);
-        });
+    handleChange(event) {
+        let temp = event.target.checked;
+        axios.post('/settings/' + this.userId + "/p", { private: temp })
+            .then(res => {
+                console.log(res.data.private);
+                this.setState({ checked: res.data.private })
+            }).catch(err => {
+                console.log(err)
+            })
     }
 
     render() {
-      return (
+        return (
             <form>
                 <input name="checkbox" type="checkbox"
-                    checked={this.state.checked} onChange={this.handleChange} 
-                    className="form-check-input" id="reactCheckbox"/>
+                    checked={this.state.checked} onChange={this.handleChange}
+                    className="form-check-input" id="reactCheckbox" />
                 <label className="form-check-label">{this.text}</label>
-            </form>  
-      ) 
+            </form>
+        )
     }
-  }
+}
 
 export default ReactCheckbox;
 

@@ -16,6 +16,7 @@ class UserPolicy
      */
     public function viewAny(User $user)
     {
+        return auth()->user->is_admin;
     }
 
     /**
@@ -25,6 +26,7 @@ class UserPolicy
      */
     public function view(User $user, User $model)
     {
+        return (auth()->user->id == $user->id) || (!$user->private);
     }
 
     /**

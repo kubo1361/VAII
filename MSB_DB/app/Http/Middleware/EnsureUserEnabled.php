@@ -21,6 +21,7 @@ class EnsureUserEnabled
         if (Auth::user()->enabled) {
             return $next($request);
         }
+        Auth::logout();
 
         return abort(403, 'You have been banned.');
     }

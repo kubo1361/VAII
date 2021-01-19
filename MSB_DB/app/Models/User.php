@@ -54,16 +54,45 @@ class User extends Authenticatable
     public function friendsOfMine()
     {
         return $this->belongsToMany(User::class, 'friendship', 'user_id', 'friend_id')
-            ->wherePivot('accepted', '=', 1) // to filter only accepted
-            ->withPivot('accepted') // or to fetch accepted value
+            ->wherePivot('accepted', '=', 1)
+            ->withPivot('accepted')
     ;
     }
 
-    // friendship that I was invited to
+    public function acceptedFriendshipsOfMine()
+    {
+        return $this->hasMany(Friendship::class, 'user_id', )->where('accepted', '=', 1)
+    ;
+    }
+
     public function friendOf()
     {
         return $this->belongsToMany(User::class, 'friendship', 'friend_id', 'user_id')
             ->wherePivot('accepted', '=', 1)
+            ->withPivot('accepted')
+    ;
+    }
+
+    // friendship that I started
+    public function invitesOfMine()
+    {
+        return $this->belongsToMany(User::class, 'friendship', 'user_id', 'friend_id')
+            ->wherePivot('accepted', '=', 0)
+            ->withPivot('accepted')
+    ;
+    }
+
+    public function unnaceptedFriendshipInvitesOfMine()
+    {
+        return $this->hasMany(Friendship::class, 'user_id', )->where('accepted', '=', 0)
+    ;
+    }
+
+    // friendship that I was invited to
+    public function invitesOf()
+    {
+        return $this->belongsToMany(User::class, 'friendship', 'friend_id', 'user_id')
+            ->wherePivot('accepted', '=', 0)
             ->withPivot('accepted')
     ;
     }
@@ -76,6 +105,14 @@ class User extends Authenticatable
         }
 
         return $this->getRelation('friendship');
+    }
+
+    public function getFriendships()
+    {
+        return $this->belongsToMany(Friendship::class, 'friendship', 'user_id', 'friend_id')
+            ->wherePivot('accepted', '=', 1)
+            ->withPivot('accepted')
+    ;
     }
 
     public function movies()

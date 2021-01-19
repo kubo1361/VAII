@@ -20,7 +20,7 @@ class MoviesController extends Controller
      */
     public function index(User $user)
     {
-        $allMovies = Movie::whereIn('user_id', $user)->latest()->get();
+        $allMovies = Movie::where('user_id', '=', $user->id)->latest()->get();
         $allMoviesCount = $allMovies->count();
 
         $watchingMovies = $allMovies->where('state', 'Watching');
@@ -69,8 +69,8 @@ class MoviesController extends Controller
     {
         //dd($request);
         $validatedData = $request->validate([
-            'name' => 'required|unique:movies',
-            'rating' => 'required|numeric|max:100',
+            'name' => 'required',
+            'rating' => 'numeric|min:0|max:100|nullable',
             'state' => 'required|in:Watching,Plan to watch,Completed,Dropped',
             'comment' => '',
             'image' => 'image',
@@ -85,7 +85,16 @@ class MoviesController extends Controller
 
         auth()->user()->movies()->create($validatedData);
 
-        return redirect('/profile/'.auth()->user()->id);
+        return redirect()->route('profile.show', ['user' => auth()->user()->id]);
+    }
+
+    public function copy(Movie $movie)
+    {
+        $newMovie = $movie->replicate();
+        $newMovie->user_id = auth()->user()->id;
+        $newMovie->save();
+
+        return view('items.movies.edit', ['movie' => $newMovie]);
     }
 
     /**
@@ -105,6 +114,7 @@ class MoviesController extends Controller
      */
     public function edit(Movie $movie)
     {
+        return view('items.movies.edit', compact('movie'));
     }
 
     /**
@@ -114,6 +124,25 @@ class MoviesController extends Controller
      */
     public function update(Request $request, Movie $movie)
     {
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'rating' => 'numeric|min:0|max:100|nullable',
+            'state' => 'required|in:Watching,Plan to watch,Completed,Dropped',
+            'comment' => '',
+            'image' => 'image',
+        ]);
+
+        if (isset($validatedData['image'])) {
+            $imagePath = $validatedData['image']->store('uploads.movies', 'public');
+            $validatedData['image'] = '/storage/'.$imagePath;
+        } else {
+            $validatedData['image'] = '/storage/default/default_movie_poster.jpg';
+        }
+
+        $movie->update($validatedData);
+        $movie->save();
+
+        return view('items.movies.show', compact('movie'));
     }
 
     /**
@@ -125,6 +154,6 @@ class MoviesController extends Controller
     {
         $movie->delete();
 
-        return redirect('/profile/'.auth()->user()->id);
+        return redirect()->route('profile.show', ['user' => auth()->user()->id]);
     }
 }

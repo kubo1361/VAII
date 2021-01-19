@@ -7,11 +7,6 @@ use Illuminate\Http\Request;
 
 class SettingsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(User $user)
     {
         return view('settings.index', compact('user'));
@@ -19,14 +14,11 @@ class SettingsController extends Controller
 
     public function private(User $user, Request $request)
     {
-        dump($user);
-        dump($request);
-        //if ($request->has('private')) {
-        $value = $request->boolean('private');
-        $user->update(['private' => (int) $value]);
-        dump($value);
+        if ($request->has('private')) {
+            $user->private = $request->boolean('private');
+            $user->save();
 
-        return ['private' => boolval($user->private)];
-        //}
+            return ['private' => boolval($user->private)];
+        }
     }
 }

@@ -16,6 +16,7 @@ class Friendship extends Migration
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('friend_id');
             $table->boolean('accepted');
+            $table->unsignedInteger('last_change_by');
 
             $table->timestamps();
         });

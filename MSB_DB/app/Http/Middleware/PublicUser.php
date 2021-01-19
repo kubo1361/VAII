@@ -20,10 +20,12 @@ class PublicUser
         }
 
         $isSameUser = $request->user == Auth::user();
-        $isPublic = !$request->user->private;
+
+        $isPublic = true;
+
         $isAdmin = boolval(Auth::user()->is_admin);
 
-        if ($isSameUser || $isPublic || $isAdmin) {
+        if (($isSameUser || $isPublic) || $isAdmin) {
             return $next($request);
         }
 

@@ -10,6 +10,9 @@
             <div class="row">
                 <h1>Edit Profile</h1>
             </div>
+            <div class="pb-3">
+                <img src="{{ $user->profile->profileImage() }}" class="nonimportant rounded mx-auto d-block img-fluid img-thumbnail">
+            </div>
             <div class="form-group row">
                 <label for="description" class="col-md-4 col-form-label">Description</label>
                     <input id="description"
